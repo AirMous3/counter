@@ -1,0 +1,8 @@
+.button {
+    background: linear-gradient(90deg, rgba(105,113,226,1) 33%, rgba(203,55,192,1) 93%);
+    margin: 5px;
+    border: black;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+}
