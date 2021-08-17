@@ -19,7 +19,7 @@ export const Button = (props: ButtonPropsType) => {
                 ? false
                 : true
 
-    const className = disabled ? s.disabled : s.button
+    const className = disabled ? s.disabled : s.btnGrad
 
     return (
         <button disabled={disabled} onClick={props.onClick} className={className}>{props.title}</button>
