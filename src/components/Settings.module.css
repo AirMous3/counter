@@ -1,0 +1,12 @@
+.input {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: 20px;
+    height: 35px;
+}
+
+.text {
+    font-size: x-large;
+    text-align: center;
+}
