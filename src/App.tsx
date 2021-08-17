@@ -30,7 +30,7 @@ function App() {
     }
 
     const setConfig = () => {
-        minValue >= 0 ? setState(minValue) : setError("Number are incorrect")
+        maxValue < minValue ? setError("Number are incorrect") : minValue >= 0 ? setState(minValue) : setError("Number are incorrect")
 
     }
 
@@ -47,8 +47,8 @@ function App() {
 
             </div>
             <div className="container">
-                <div className={minValue < 0 ? "display-error" : "display"}>
-                    <DisplayCounter state={state} error={error} minValue={minValue}/>
+                <div>
+                    <DisplayCounter state={state} error={error} minValue={minValue} maxValue={maxValue}/>
                 </div>
                 <div className={"bottom"}>
                     <Button onClick={incButton} state={state} title={"Inc"} maxValue={maxValue}/>
