@@ -14,7 +14,7 @@ export const Settings = (props: SettingsPropsType) => {
         <div className={s.text}>
             max value
         </div>
-        <input onChange={props.onChangeMax} className={s.input} type="number"/>
+        <input onChange={props.onChangeMax}  className={s.input} type="number"/>
         <div className={s.text}>
             min value
         </div>

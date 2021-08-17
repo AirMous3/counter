@@ -3,7 +3,11 @@
     flex-direction: row;
     text-align: center;
     margin: 20px;
-    height: 35px;
+    height: 25px;
+    border-radius: 10px;
+    outline: none;
+
+
 }
 
 .text {
