@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
 import {Button} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
@@ -19,6 +19,26 @@ function App() {
     let [minValue, setMinValue] = useState(0)
     let [maxValue, setMaxValue] = useState(0)
 
+    useEffect( () => {
+        let valueAsString = localStorage.getItem("counterValue")
+        let valueAsNumber = JSON.parse(valueAsString? valueAsString : "")
+        let valueAsStringMax = localStorage.getItem("counterMaxValue")
+        let valueAsNumberMax = JSON.parse(valueAsStringMax? valueAsStringMax : "")
+        let valueAsStringMin = localStorage.getItem("counterMinValue")
+        let valueAsNumberMin = JSON.parse(valueAsStringMin? valueAsStringMin : "")
+        setState(valueAsNumber)
+        setMaxValue(valueAsNumberMax)
+        setMinValue(valueAsNumberMin)
+    } , [] )
+
+
+    useEffect( () => {
+    localStorage.setItem("counterValue", JSON.stringify(state))
+    localStorage.setItem("counterMinValue", JSON.stringify(minValue))
+    localStorage.setItem("counterMaxValue", JSON.stringify(maxValue))
+    } , [state, minValue, maxValue] )
+
+
     const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let result = Number(e.currentTarget.value)
         setMinValue(result)
@@ -31,6 +51,7 @@ function App() {
 
     const setConfig = () => {
         maxValue < minValue ? setError("Number are incorrect") : minValue >= 0 ? setState(minValue) : setError("Number are incorrect")
+
 
     }
 
