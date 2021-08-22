@@ -7,7 +7,11 @@ import {Settings} from "./components/Settings";
 function App() {
 
     let [state, setState] = useState(0)  // state of main number
-    let [error, setError] = useState("") // state of error
+    let [error, setError] = useState("Number are incorrect") // state of error
+    let [minValue, setMinValue] = useState(0) // minValue state
+    let [maxValue, setMaxValue] = useState(0) // maxValue state
+    // let [minValueSettings, setMinValueSettings] = useState(0)
+    // let [maxValueSettings, setMaxValueSettings] = useState(0)
 
     const incButton = () => {
         setState(state + 1) // callback function to increment number
@@ -16,8 +20,6 @@ function App() {
         setState(minValue)   // callback function reset main number to minValue
     }
 
-    let [minValue, setMinValue] = useState(0) // minValue state
-    let [maxValue, setMaxValue] = useState(0) // maxValue state
 
     useEffect( () => {
         let valueAsString = localStorage.getItem("counterValue")  // get Main Value as String to variable
@@ -50,7 +52,7 @@ function App() {
     }
 
     const setConfig = () => {
-        maxValue < minValue ? setError("Number are incorrect") : minValue >= 0 ? setState(minValue) : setError("Number are incorrect")
+        setState(minValue)
 
 
     }
@@ -63,7 +65,7 @@ function App() {
                           onChangeMax={onChangeMaxHandler}
                 />
                 <div>
-                    <Button title={"Set"} onClick={setConfig} state={state} maxValue={maxValue}/>
+                    <Button title={"Set"} onClick={setConfig} state={state} maxValue={maxValue} minValue={minValue}/>
                 </div>
 
             </div>
@@ -72,8 +74,8 @@ function App() {
                     <DisplayCounter state={state} error={error} minValue={minValue} maxValue={maxValue}/>
                 </div>
                 <div className={"bottom"}>
-                    <Button onClick={incButton} state={state} title={"Inc"} maxValue={maxValue}/>
-                    <Button onClick={resetState} state={state} title={"Reset"} maxValue={maxValue}/>
+                    <Button onClick={incButton} state={state} title={"Inc"} maxValue={maxValue} minValue={minValue}/>
+                    <Button onClick={resetState} state={state} title={"Reset"} maxValue={maxValue}  />
                 </div>
 
             </div>

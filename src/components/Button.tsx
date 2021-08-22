@@ -6,16 +6,17 @@ type ButtonPropsType = {
     onClick: () => void
     state: number
     maxValue: number
+    minValue?: number
 
 }
 
 export const Button = (props: ButtonPropsType) => {
 
-    const disabled = props.title === "Inc" && props.state < props.maxValue
+    const disabled = props.title === "Inc" && props.state < props.maxValue && (props.minValue || 0 ) >= 0
         ? false
         : props.title === "Reset"
             ? false
-            : props.title === "Set"
+            : props.title === "Set" && (props.minValue || 0) >= 0 && props.maxValue > 0 && (props.minValue || 0) < props.maxValue
                 ? false
                 : true
 
