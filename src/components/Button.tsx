@@ -18,7 +18,7 @@ export const Button = (props: ButtonPropsType) => {
         ? false
         : props.title === "Reset"
             ? false
-            : props.title === "Set" && (props.minSetValue || 0) >= 0 && (props.maxSetValue || 0) > 0
+            : props.title === "Set" && (props.minSetValue || 0) >= 0 && (props.maxSetValue || 0) > 0  && (props.minSetValue || 0) < (props.maxSetValue || 0)
                 ? false
                 : true
 

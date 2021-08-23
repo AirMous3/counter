@@ -7,10 +7,26 @@
     border-radius: 10px;
     outline: none;
 
-
 }
 
 .text {
     font-size: x-large;
     text-align: center;
+}
+
+.textError{
+    font-size: x-large;
+    text-align: center;
+    color: red;
+}
+
+.inputError {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: 20px;
+    height: 25px;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid red;
 }

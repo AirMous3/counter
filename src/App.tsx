@@ -4,6 +4,7 @@ import {Button} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
 import {Settings} from "./components/Settings";
 
+
 function App() {
 
     let [state, setState] = useState(0)  // state of main number
@@ -12,6 +13,7 @@ function App() {
     let [maxValue, setMaxValue] = useState(0) // maxValue state
     let [minValueSettings, setMinValueSettings] = useState(0)
     let [maxValueSettings, setMaxValueSettings] = useState(0)
+    let [displayMode, setDisplayMode] = useState(false)
 
     const incButton = () => {
         setState(state + 1) // callback function to increment number
@@ -46,7 +48,7 @@ function App() {
         localStorage.setItem("counterMaxValue", JSON.stringify(maxValue)) // get Max Value as String
         localStorage.setItem("counterMaxValueSettings", JSON.stringify(maxValueSettings))
         localStorage.setItem("counterMinValueSettings", JSON.stringify(minValueSettings))
-    }, [state, minValue, maxValue, maxValueSettings, minValueSettings ])
+    }, [state, minValue, maxValue, maxValueSettings, minValueSettings])
 
 
     const onChangeMinHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,32 +65,40 @@ function App() {
         setMinValue(minValueSettings)
         setMaxValue(maxValueSettings)
         setState(minValueSettings)
-
-
+        setDisplayMode(true)
     }
-
+    const changeDisplayMode = () => {
+        setDisplayMode(false)
+    }
 
     return (<div className={"main"}>
 
-            <div className={"settings"}>
-                <Settings minValue={minValueSettings} onChangeMin={onChangeMinHandler} maxValue={maxValueSettings}
-                          onChangeMax={onChangeMaxHandler}
-                />
-                <div>
-                    <Button title={"Set"} onClick={setConfig} state={state} maxValue={maxValue} minValue={minValue} minSetValue={minValueSettings} maxSetValue={maxValueSettings}/>
+            {displayMode
+                ? <div className="container">
+                    <div>
+                        <DisplayCounter state={state} error={error} minValue={minValueSettings}
+                                        maxValue={maxValueSettings}/>
+                    </div>
+                    <div>
+                        <Button onClick={incButton} state={state} title={"Inc"} maxValue={maxValue} minValue={minValue}
+                                minSetValue={minValueSettings} maxSetValue={maxValueSettings}/>
+                        <Button onClick={resetState} state={state} title={"Reset"} maxValue={maxValue}/>
+                        <Button onClick={changeDisplayMode} title={"Set"} state={state} maxValue={maxValue}
+                                minValue={minValue}
+                                minSetValue={minValueSettings} maxSetValue={maxValueSettings}/>
+                    </div>
+
+                </div>
+                : <div className={"settings"}>
+                    <Settings minValueSettings={minValueSettings} onChangeMin={onChangeMinHandler} maxValueSettings={maxValueSettings}
+                              onChangeMax={onChangeMaxHandler} error={error}/>
+                    <div>
+                        <Button title={"Set"} onClick={setConfig} state={state} maxValue={maxValue} minValue={minValue}
+                                minSetValue={minValueSettings} maxSetValue={maxValueSettings}/>
+                    </div>
                 </div>
 
-            </div>
-            <div className="container">
-                <div>
-                    <DisplayCounter state={state} error={error} minValue={minValueSettings} maxValue={maxValueSettings}/>
-                </div>
-                <div className={"bottom"}>
-                    <Button onClick={incButton} state={state} title={"Inc"} maxValue={maxValue} minValue={minValue} minSetValue={minValueSettings} maxSetValue={maxValueSettings}/>
-                    <Button onClick={resetState} state={state} title={"Reset"} maxValue={maxValue}/>
-                </div>
-
-            </div>
+            }
         </div>
 
     );

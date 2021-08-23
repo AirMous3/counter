@@ -3,22 +3,58 @@ import {ChangeEvent} from "react";
 
 
 type SettingsPropsType = {
-    minValue: number
-    maxValue: number
+    minValueSettings: number
+    maxValueSettings: number
     onChangeMin: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeMax: (e: ChangeEvent<HTMLInputElement>) => void
+    error: string
 }
 
 export const Settings = (props: SettingsPropsType) => {
+
+    const classErrorInput = props.maxValueSettings < props.minValueSettings
+        ? s.inputError
+        : props.maxValueSettings <= 0
+            ? s.inputError
+            : props.minValueSettings === props.maxValueSettings
+                ? s.inputError
+                : props.minValueSettings < 0
+                    ? s.inputError
+                    : s.input
+
+    const classTextError = props.maxValueSettings < props.minValueSettings
+        ? s.textError
+        : props.maxValueSettings <= 0
+            ? s.textError
+            : props.minValueSettings === props.maxValueSettings
+                ? s.textError
+                : props.minValueSettings < 0
+                    ? s.textError
+                    : s.text
+
+
+    const divMaxText = props.maxValueSettings < props.minValueSettings
+        ? "incorrect max value"
+        : props.maxValueSettings <= 0
+            ? "incorrect max value"
+            : props.minValueSettings === props.maxValueSettings
+                ? "incorrect max value"
+                : props.minValueSettings < 0
+                    ? "incorrect max value"
+                    : "max value"
+
+
     return <div>
-        <div className={s.text}>
-            max value
+        <div className={classTextError}>
+            {divMaxText}
         </div>
-        <input value={props.maxValue} onChange={props.onChangeMax}  className={s.input} type="number"/>
-        <div className={s.text}>
+        <input value={props.maxValueSettings} onChange={props.onChangeMax} className={classErrorInput}
+               type="number"/>
+        <div className={classTextError}>
             min value
         </div>
-        <input value={props.minValue} onChange={props.onChangeMin} className={s.input} type="number"/>
+        <input value={props.minValueSettings} onChange={props.onChangeMin} className={classErrorInput}
+               type="number"/>
 
     </div>
 }
