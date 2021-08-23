@@ -43,6 +43,15 @@ export const Settings = (props: SettingsPropsType) => {
                     ? "incorrect max value"
                     : "max value"
 
+    const divMinText = props.maxValueSettings < props.minValueSettings
+        ? "incorrect min value"
+        : props.maxValueSettings <= 0
+            ? "incorrect min value"
+            : props.minValueSettings === props.maxValueSettings
+                ? "incorrect min value"
+                : props.minValueSettings < 0
+                    ? "incorrect min value"
+                    : "min value"
 
     return <div>
         <div className={classTextError}>
@@ -51,7 +60,7 @@ export const Settings = (props: SettingsPropsType) => {
         <input value={props.maxValueSettings} onChange={props.onChangeMax} className={classErrorInput}
                type="number"/>
         <div className={classTextError}>
-            min value
+            {divMinText}
         </div>
         <input value={props.minValueSettings} onChange={props.onChangeMin} className={classErrorInput}
                type="number"/>

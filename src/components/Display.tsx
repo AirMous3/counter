@@ -6,16 +6,8 @@ type CounterType = {
 }
 
 export const DisplayCounter = (props: CounterType) => {
-    const className = props.minValue < 0
-        ? "display-error"
-        : props.maxValue <= 0
-            ? "display-error"
-            : props.state === props.maxValue || props.maxValue < props.state
-                ? "display-error"
-                : props.minValue > props.maxValue
-                    ? "display-error"
-                    : "display"
+    const className = props.state === props.maxValue ? "display-error" : "display"
     return (
-        <div  className={className} >{(props.minValue > props.maxValue)? props.error : (props.minValue >= 0 && props.maxValue > 0) ? props.state :  props.error}</div>
+        <div  className={className} >{props.state}</div>
     )
 }
