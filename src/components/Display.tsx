@@ -10,7 +10,7 @@ export const DisplayCounter = (props: CounterType) => {
         ? "display-error"
         : props.maxValue <= 0
             ? "display-error"
-            : props.state === props.maxValue
+            : props.state === props.maxValue || props.maxValue < props.state
                 ? "display-error"
                 : props.minValue > props.maxValue
                     ? "display-error"
