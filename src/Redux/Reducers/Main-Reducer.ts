@@ -1,6 +1,6 @@
 import {ActionsType} from "./ActionTypes";
 
-let initialState: initialStateType = {
+let initialState = {
     counterValue: 0,
     maxValue: 0,
     minValue: 0,
@@ -9,16 +9,9 @@ let initialState: initialStateType = {
 
 }
 
-type initialStateType = {
-    counterValue: number
-    minValue: number
-    maxValue: number
-    displayMode: boolean
-    error: string
+type initialStateType = typeof initialState
 
-}
-
-export const MainReducer = (state = initialState, action: ActionsType): initialStateType => {
+export const MainReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case "INCREMENT-COUNTER-VALUE":
             return {...state, counterValue: state.counterValue + 1}
