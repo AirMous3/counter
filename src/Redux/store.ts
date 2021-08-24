@@ -7,7 +7,7 @@ const rootReducer = combineReducers({counter: MainReducer})
 
 let preloadedState
 const stateToString = localStorage.getItem("state") // get the  state
-preloadedState = stateToString ? JSON.parse(stateToString) : undefined  // check on null
+if(stateToString){preloadedState = JSON.parse(stateToString)}  // check on null
 
 
 export const store = createStore(rootReducer, preloadedState) // second parameter preloadedState

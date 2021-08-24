@@ -6,7 +6,7 @@ import {Settings} from "./components/Settings";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "./Redux/store";
 import {
-    changeDisplayModeAc,
+    changeDisplayModeAc, changeIsError,
     changeMaxValueAc, changeMinValueAc,
     incrementCounterValueAc,
     resetStateAc, setConfigAc
@@ -16,17 +16,24 @@ import {
 function App() {
 
     const dispatch = useDispatch()
-    const displayMode = useSelector((state: RootStateType) => state.counter.displayMode)
-    const error = useSelector((state: RootStateType) => state.counter.error)
-    const counterValue = useSelector((state: RootStateType) => state.counter.counterValue)
-    const maxValue = useSelector((state: RootStateType) => state.counter.maxValue)
-    const minValue = useSelector((state: RootStateType) => state.counter.minValue)
+    const displayMode = useSelector<RootStateType,boolean>(state => state.counter.displayMode)
+    const error = useSelector<RootStateType,string>(state => state.counter.error)
+    const isError = useSelector<RootStateType, boolean>( state=> state.counter.isError )
+    const counterValue = useSelector<RootStateType,number>(state => state.counter.counterValue)
+    const maxValue = useSelector<RootStateType,number>(state => state.counter.maxValue)
+    const minValue = useSelector<RootStateType,number>(state => state.counter.minValue)
     const incButton = () => dispatch(incrementCounterValueAc())
     const resetState = () => dispatch(resetStateAc())
     const changeDisplayMode = () => dispatch(changeDisplayModeAc(false))
     const setConfig = () => dispatch(setConfigAc(true))
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
+
+    if (maxValue <= minValue || maxValue <= 0 ||  minValue < 0 ) {  // check value on error
+         dispatch(changeIsError(true))
+    } else dispatch(changeIsError(false))
+
+
 
 
     return (<div className={"main"}>
@@ -50,12 +57,12 @@ function App() {
 
                 </div>
                 : <div className={"settings"}>
-                    <Settings minValue={minValue}
-                              maxValue={maxValue}
-                              error={error} onChangeMax={onChaneMaxValue} onChangeMin={onChaneMinValue}/>
+                    <Settings minValue={minValue} maxValue={maxValue}
+                              error={error} onChangeMax={onChaneMaxValue}
+                              onChangeMin={onChaneMinValue} isError={isError}/>
                     <div>
-                        <Button title={"Set"} onClick={setConfig} counterValue={counterValue} maxValue={maxValue}
-                                minValue={minValue}/>
+                        <Button title={"Set"} onClick={setConfig} counterValue={counterValue}
+                                maxValue={maxValue} minValue={minValue}/>
                     </div>
                 </div>
 

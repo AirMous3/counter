@@ -5,7 +5,8 @@ let initialState = {
     maxValue: 0,
     minValue: 0,
     displayMode: false,
-    error: "Number are incorrect"
+    error: "Number are incorrect",
+    isError: false
 
 }
 
@@ -14,6 +15,7 @@ type initialStateType = typeof initialState
 export const MainReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
     switch (action.type) {
         case "INCREMENT-COUNTER-VALUE":
+
             return {...state, counterValue: state.counterValue + 1}
         case "RESET-VALUE":
             return {...state, counterValue: state.minValue}
@@ -24,7 +26,9 @@ export const MainReducer = (state: initialStateType = initialState, action: Acti
         case "CHANGE-DISPLAY-MODE":
             return {...state, displayMode: action.mode}
         case "SET-CONFIG":
-            return {...state, counterValue: state.minValue , displayMode: action.mode}
+            return {...state, counterValue: state.minValue, displayMode: action.mode}
+        case "CHANGE-IS-ERROR":
+            return {...state, isError: action.error}
         default:
             return state
     }
@@ -37,8 +41,10 @@ export const changeMaxValueAc = (value: number) => ({type: "CHANGE-MAX-VALUE", v
 
 export const changeMinValueAc = (value: number) => ({type: "CHANGE-MIN-VALUE", value}) as const
 
-export const setConfigAc = (mode: boolean) => ({type: "SET-CONFIG" , mode}) as const
+export const setConfigAc = (mode: boolean) => ({type: "SET-CONFIG", mode}) as const
 
 export const resetStateAc = () => ({type: "RESET-VALUE"}) as const
 
-export const changeDisplayModeAc = (mode: boolean) => ({type: "CHANGE-DISPLAY-MODE" , mode }) as const
+export const changeIsError = (error: boolean) => ({type: "CHANGE-IS-ERROR", error}) as const
+
+export const changeDisplayModeAc = (mode: boolean) => ({type: "CHANGE-DISPLAY-MODE", mode}) as const

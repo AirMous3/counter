@@ -1,5 +1,5 @@
 import {
-    changeDisplayModeAc,
+    changeDisplayModeAc, changeIsError,
     changeMaxValueAc, changeMinValueAc,
     incrementCounterValueAc,
     resetStateAc, setConfigAc,
@@ -12,3 +12,4 @@ export type ActionsType =
     | ReturnType<typeof changeMaxValueAc>
     | ReturnType<typeof changeMinValueAc>
     | ReturnType<typeof setConfigAc>
+    | ReturnType<typeof changeIsError>
