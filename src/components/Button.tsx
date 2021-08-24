@@ -4,23 +4,22 @@ import s from "./Button.module.css"
 type ButtonPropsType = {
     title: string
     onClick: () => void
-    state: number
+    counterValue: number
     maxValue: number
-    minValue?: number
-    minSetValue?: number
-    maxSetValue?: number
+    minValue: number
 
 }
 
 export const Button = (props: ButtonPropsType) => {
 
-    const disabled = props.title === "Inc" && props.state < props.maxValue && (props.minValue || 0) >= 0 && props.maxValue === props.maxSetValue && props.minValue === props.minSetValue
+    const disabled = props.title === "Inc" && props.counterValue < props.maxValue
         ? false
         : props.title === "Reset"
             ? false
-            : props.title === "Set" && (props.minSetValue || 0) >= 0 && (props.maxSetValue || 0) > 0  && (props.minSetValue || 0) < (props.maxSetValue || 0)
+            : props.title === "Set" && props.minValue  >= 0 && props.maxValue > 0 && props.minValue  < props.maxValue
                 ? false
                 : true
+
 
     const className = disabled ? s.disabled : s.button
 
