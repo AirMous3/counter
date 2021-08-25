@@ -33,6 +33,7 @@ function App() {
          dispatch(changeIsError(true))
     } else dispatch(changeIsError(false))
 
+    const buttonDisableInc = counterValue === maxValue ? true : false
 
 
 
@@ -45,14 +46,14 @@ function App() {
                     </div>
                     <div>
                         <Button onClick={incButton} counterValue={counterValue} title={"Inc"} maxValue={maxValue}
-                                minValue={minValue}/>
+                                minValue={minValue} buttonDisable={buttonDisableInc}/>
 
                         <Button onClick={resetState} counterValue={counterValue} title={"Reset"} maxValue={maxValue}
                                 minValue={minValue}/>
 
                         <Button onClick={changeDisplayMode} title={"Set"} counterValue={counterValue}
                                 maxValue={maxValue}
-                                minValue={minValue}/>
+                                minValue={minValue} />
                     </div>
 
                 </div>
@@ -62,7 +63,7 @@ function App() {
                               onChangeMin={onChaneMinValue} isError={isError}/>
                     <div>
                         <Button title={"Set"} onClick={setConfig} counterValue={counterValue}
-                                maxValue={maxValue} minValue={minValue}/>
+                                maxValue={maxValue} minValue={minValue} buttonDisable={isError}/>
                     </div>
                 </div>
 

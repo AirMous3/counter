@@ -7,19 +7,13 @@ type ButtonPropsType = {
     counterValue: number
     maxValue: number
     minValue: number
+    buttonDisable?: boolean
 
 }
 
 export const Button = (props: ButtonPropsType) => {
 
-    const disabled = props.title === "Inc" && props.counterValue < props.maxValue
-        ? false
-        : props.title === "Reset"
-            ? false
-            : props.title === "Set" && props.minValue  >= 0 && props.maxValue > 0 && props.minValue  < props.maxValue
-                ? false
-                : true
-
+    const disabled = props.buttonDisable
 
     const className = disabled ? s.disabled : s.button
 
