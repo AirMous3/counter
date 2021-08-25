@@ -33,6 +33,7 @@ function App() {
          dispatch(changeIsError(true))
     } else dispatch(changeIsError(false))
 
+    // const error1 = maxValue <= minValue || maxValue <= 0 ||  minValue < 0 ? true : false
     const buttonDisableInc = counterValue === maxValue ? true : false
 
 

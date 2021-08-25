@@ -22,7 +22,7 @@ export const Settings = (props: SettingsPropsType) => {
 
 
 
-    return <div>
+    return <div className={s.content}>
         <div className={classTextError}>
             {errorMaxValueText}
         </div>
