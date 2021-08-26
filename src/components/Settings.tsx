@@ -7,7 +7,6 @@ type SettingsPropsType = {
     maxValue: number
     onChangeMin: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeMax: (e: ChangeEvent<HTMLInputElement>) => void
-    error: string
     isError: boolean
 }
 

@@ -4,9 +4,6 @@ import s from "./Button.module.css"
 type ButtonPropsType = {
     title: string
     onClick: () => void
-    counterValue: number
-    maxValue: number
-    minValue: number
     buttonDisable?: boolean
 
 }

@@ -6,7 +6,7 @@ import {Settings} from "./components/Settings";
 import {useDispatch, useSelector} from "react-redux";
 import {RootStateType} from "./Redux/store";
 import {
-    changeDisplayModeAc, changeIsError,
+    changeDisplayModeAc,
     changeMaxValueAc, changeMinValueAc,
     incrementCounterValueAc,
     resetStateAc, setConfigAc
@@ -16,12 +16,10 @@ import {
 function App() {
 
     const dispatch = useDispatch()
-    const displayMode = useSelector<RootStateType,boolean>(state => state.counter.displayMode)
-    const error = useSelector<RootStateType,string>(state => state.counter.error)
-    const isError = useSelector<RootStateType, boolean>( state=> state.counter.isError )
-    const counterValue = useSelector<RootStateType,number>(state => state.counter.counterValue)
-    const maxValue = useSelector<RootStateType,number>(state => state.counter.maxValue)
-    const minValue = useSelector<RootStateType,number>(state => state.counter.minValue)
+    const displayMode = useSelector<RootStateType, boolean>(state => state.counter.displayMode)
+    const counterValue = useSelector<RootStateType, number>(state => state.counter.counterValue)
+    const maxValue = useSelector<RootStateType, number>(state => state.counter.maxValue)
+    const minValue = useSelector<RootStateType, number>(state => state.counter.minValue)
     const incButton = () => dispatch(incrementCounterValueAc())
     const resetState = () => dispatch(resetStateAc())
     const changeDisplayMode = () => dispatch(changeDisplayModeAc(false))
@@ -29,13 +27,9 @@ function App() {
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
 
-    if (maxValue <= minValue || maxValue <= 0 ||  minValue < 0 ) {  // check value on error
-         dispatch(changeIsError(true))
-    } else dispatch(changeIsError(false))
 
-    // const error1 = maxValue <= minValue || maxValue <= 0 ||  minValue < 0 ? true : false
-    const buttonDisableInc = counterValue === maxValue ? true : false
-
+    const error = maxValue <= minValue || maxValue <= 0 || minValue < 0
+    const buttonDisableInc = counterValue === maxValue
 
 
     return (<div className={"main"}>
@@ -43,28 +37,21 @@ function App() {
             {displayMode
                 ? <div className="container">
                     <div>
-                        <DisplayCounter error={error} counterValue={counterValue} maxValue={maxValue}/>
+                        <DisplayCounter counterValue={counterValue} maxValue={maxValue}/>
                     </div>
                     <div>
-                        <Button onClick={incButton} counterValue={counterValue} title={"Inc"} maxValue={maxValue}
-                                minValue={minValue} buttonDisable={buttonDisableInc}/>
+                        <Button onClick={incButton} title={"Inc"} buttonDisable={buttonDisableInc}/>
 
-                        <Button onClick={resetState} counterValue={counterValue} title={"Reset"} maxValue={maxValue}
-                                minValue={minValue}/>
+                        <Button onClick={resetState} title={"Reset"}/>
 
-                        <Button onClick={changeDisplayMode} title={"Set"} counterValue={counterValue}
-                                maxValue={maxValue}
-                                minValue={minValue} />
+                        <Button onClick={changeDisplayMode} title={"Set"}/>
                     </div>
 
                 </div>
                 : <div className={"settings"}>
-                    <Settings minValue={minValue} maxValue={maxValue}
-                              error={error} onChangeMax={onChaneMaxValue}
-                              onChangeMin={onChaneMinValue} isError={isError}/>
+                    <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue} onChangeMin={onChaneMinValue} isError={error}/>
                     <div>
-                        <Button title={"Set"} onClick={setConfig} counterValue={counterValue}
-                                maxValue={maxValue} minValue={minValue} buttonDisable={isError}/>
+                        <Button title={"Set"} onClick={setConfig} buttonDisable={error}/>
                     </div>
                 </div>
 

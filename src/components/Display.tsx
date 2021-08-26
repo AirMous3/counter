@@ -1,6 +1,5 @@
 
 type CounterType = {
-    error: string
     counterValue: number
     maxValue: number
 }
