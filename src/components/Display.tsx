@@ -1,15 +1,16 @@
+import React from "react";
 
 type CounterType = {
     counterValue: number
     maxValue: number
 }
 
-export const DisplayCounter = (props: CounterType) => {
+export const DisplayCounter = ({counterValue,maxValue}:CounterType) => {
 
 
 
-    const className = props.counterValue === props.maxValue ? "display-error" : "display"
+    const className = counterValue === maxValue ? "display-error" : "display"
     return (
-        <div  className={className} >{props.counterValue}</div>
+        <div  className={className} >{counterValue}</div>
     )
 }

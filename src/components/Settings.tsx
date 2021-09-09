@@ -1,5 +1,5 @@
 import s from "./Settings.module.css"
-import {ChangeEvent} from "react";
+import React, {ChangeEvent} from "react";
 
 
 type SettingsPropsType = {
@@ -10,14 +10,14 @@ type SettingsPropsType = {
     isError: boolean
 }
 
-export const Settings = (props: SettingsPropsType) => {
+export const Settings = ({isError,maxValue,onChangeMax,onChangeMin,minValue}:SettingsPropsType) => {
 
 
 
-    const classErrorInput = props.isError? s.inputError : s.input
-    const classTextError = props.isError? s.textError : s.text
-    const errorMaxValueText = props.isError? "incorrect max number"  : "max value"
-    const errorMinValueText = props.isError? "incorrect min number"  : "min value"
+    const classErrorInput = isError? s.inputError : s.input
+    const classTextError = isError? s.textError : s.text
+    const errorMaxValueText = isError? "incorrect max number"  : "max value"
+    const errorMinValueText = isError? "incorrect min number"  : "min value"
 
 
 
@@ -25,12 +25,12 @@ export const Settings = (props: SettingsPropsType) => {
         <div className={classTextError}>
             {errorMaxValueText}
         </div>
-        <input value={props.maxValue} onChange={props.onChangeMax} className={classErrorInput}
+        <input value={maxValue} onChange={onChangeMax} className={classErrorInput}
                type="number"/>
         <div className={classTextError}>
             {errorMinValueText}
         </div>
-        <input value={props.minValue} onChange={props.onChangeMin} className={classErrorInput}
+        <input value={minValue} onChange={onChangeMin} className={classErrorInput}
                type="number"/>
 
     </div>
