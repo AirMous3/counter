@@ -40,18 +40,18 @@ function App() {
                         <DisplayCounter counterValue={counterValue} maxValue={maxValue}/>
                     </div>
                     <div>
-                        <Button onClick={incButton} title={"Inc"} buttonDisable={buttonDisableInc}/>
+                        <Button onClick={incButton} title={"inc"} buttonDisable={buttonDisableInc}/>
 
-                        <Button onClick={resetState} title={"Reset"}/>
+                        <Button onClick={resetState} title={"reset"}/>
 
-                        <Button onClick={changeDisplayMode} title={"Set"}/>
+                        <Button onClick={changeDisplayMode} title={"set"}/>
                     </div>
 
                 </div>
                 : <div className={"settings"}>
                     <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue} onChangeMin={onChaneMinValue} isError={error}/>
                     <div>
-                        <Button title={"Set"} onClick={setConfig} buttonDisable={error}/>
+                        <Button title={"set"} onClick={setConfig} buttonDisable={error}/>
                     </div>
                 </div>
 
