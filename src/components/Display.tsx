@@ -7,7 +7,7 @@ type CounterType = {
 
 export const DisplayCounter = ({counterValue,maxValue}:CounterType) => {
 
-
+    console.log("display rendered")
 
     const className = counterValue === maxValue ? "display-error" : "display"
     return (

@@ -1,6 +1,6 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useCallback} from 'react';
 import './App.css';
-import {Button} from "./components/Button";
+import {Button, ButtonMemo} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
 import {Settings} from "./components/Settings";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,16 +14,16 @@ import {
 
 
 function App() {
-
+    console.log("app rendered")
     const dispatch = useDispatch()
     const displayMode = useSelector<RootStateType, boolean>(state => state.counter.displayMode)
     const counterValue = useSelector<RootStateType, number>(state => state.counter.counterValue)
     const maxValue = useSelector<RootStateType, number>(state => state.counter.maxValue)
     const minValue = useSelector<RootStateType, number>(state => state.counter.minValue)
-    const incButton = () => dispatch(incrementCounterValueAc())
-    const resetState = () => dispatch(resetStateAc())
-    const changeDisplayMode = () => dispatch(changeDisplayModeAc(false))
-    const setConfig = () => dispatch(setConfigAc(true))
+    const incButton = useCallback(() => dispatch(incrementCounterValueAc()), [dispatch])
+    const resetState = useCallback(() => dispatch(resetStateAc()), [dispatch])
+    const changeDisplayMode = useCallback(() => dispatch(changeDisplayModeAc(false)), [dispatch])
+    const setConfig = useCallback(() => dispatch(setConfigAc(true)), [dispatch])
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
 
@@ -40,18 +40,19 @@ function App() {
                         <DisplayCounter counterValue={counterValue} maxValue={maxValue}/>
                     </div>
                     <div>
-                        <Button onClick={incButton} title={"inc"} buttonDisable={buttonDisableInc}/>
+                        <ButtonMemo onClick={incButton} title={"inc"} buttonDisable={buttonDisableInc}/>
 
-                        <Button onClick={resetState} title={"reset"}/>
+                        <ButtonMemo onClick={resetState} title={"reset"}/>
 
-                        <Button onClick={changeDisplayMode} title={"set"}/>
+                        <ButtonMemo onClick={changeDisplayMode} title={"set"}/>
                     </div>
 
                 </div>
                 : <div className={"settings"}>
-                    <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue} onChangeMin={onChaneMinValue} isError={error}/>
+                    <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue}
+                              onChangeMin={onChaneMinValue} isError={error}/>
                     <div>
-                        <Button title={"set"} onClick={setConfig} buttonDisable={error}/>
+                        <ButtonMemo title={"set"} onClick={setConfig} buttonDisable={error}/>
                     </div>
                 </div>
 

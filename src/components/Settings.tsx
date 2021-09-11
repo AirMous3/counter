@@ -10,9 +10,10 @@ type SettingsPropsType = {
     isError: boolean
 }
 
+
 export const Settings = ({isError,maxValue,onChangeMax,onChangeMin,minValue}:SettingsPropsType) => {
 
-
+    console.log("settings rendered")
 
     const classErrorInput = isError? s.inputError : s.input
     const classTextError = isError? s.textError : s.text

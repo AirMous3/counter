@@ -12,10 +12,11 @@ type ButtonPropsType = {
 export const Button = ({title, buttonDisable, onClick}: ButtonPropsType) => {
 
 
-
+    console.log("button rendered")
     const className = `${s.button} ${buttonDisable? s.disabled : ""}`
 
     return (
         <button disabled={buttonDisable} onClick={onClick} className={className}>{title}</button>
     )
 }
+export const ButtonMemo = React.memo(Button)
