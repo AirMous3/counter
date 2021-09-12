@@ -1,25 +1,31 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import './App.css';
-import {Button, ButtonMemo} from "./components/Button";
+import {ButtonMemo} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
 import {Settings} from "./components/Settings";
 import {useDispatch, useSelector} from "react-redux";
-import {RootStateType} from "./Redux/store";
 import {
     changeDisplayModeAc,
-    changeMaxValueAc, changeMinValueAc,
+    changeMaxValueAc,
+    changeMinValueAc,
     incrementCounterValueAc,
-    resetStateAc, setConfigAc
+    resetStateAc,
+    setConfigAc
 } from "./Redux/Reducers/Main-Reducer";
+import {selectCounterValue, selectDisplayMode, selectMaxValue, selectMinValue} from "./selectors";
 
 
 function App() {
-    console.log("app rendered")
+
     const dispatch = useDispatch()
-    const displayMode = useSelector<RootStateType, boolean>(state => state.counter.displayMode)
-    const counterValue = useSelector<RootStateType, number>(state => state.counter.counterValue)
-    const maxValue = useSelector<RootStateType, number>(state => state.counter.maxValue)
-    const minValue = useSelector<RootStateType, number>(state => state.counter.minValue)
+    // const displayMode = useSelector<RootStateType, boolean>(state => state.counter.displayMode)
+    const displayMode = useSelector(selectDisplayMode)
+    // const counterValue = useSelector<RootStateType, number>(state => state.counter.counterValue)
+    const counterValue = useSelector(selectCounterValue)
+    // const maxValue = useSelector<RootStateType, number>(state => state.counter.maxValue)
+    const maxValue = useSelector(selectMaxValue)
+    // const minValue = useSelector<RootStateType, number>(state => state.counter.minValue)
+    const minValue = useSelector(selectMinValue)
     const incButton = useCallback(() => dispatch(incrementCounterValueAc()), [dispatch])
     const resetState = useCallback(() => dispatch(resetStateAc()), [dispatch])
     const changeDisplayMode = useCallback(() => dispatch(changeDisplayModeAc(false)), [dispatch])

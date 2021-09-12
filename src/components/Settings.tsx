@@ -11,15 +11,13 @@ type SettingsPropsType = {
 }
 
 
-export const Settings = ({isError,maxValue,onChangeMax,onChangeMin,minValue}:SettingsPropsType) => {
+export const Settings = ({isError, maxValue, onChangeMax, onChangeMin, minValue}: SettingsPropsType) => {
 
-    console.log("settings rendered")
 
-    const classErrorInput = isError? s.inputError : s.input
-    const classTextError = isError? s.textError : s.text
-    const errorMaxValueText = isError? "incorrect max number"  : "max value"
-    const errorMinValueText = isError? "incorrect min number"  : "min value"
-
+    const classErrorInput = isError ? s.inputError : s.input
+    const classTextError = isError ? s.textError : s.text
+    const errorMaxValueText = isError ? "incorrect max number" : "max value"
+    const errorMinValueText = isError ? "incorrect min number" : "min value"
 
 
     return <div className={s.content}>
