@@ -1,13 +1,36 @@
+.root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.root.light {
+    background: #eaf2f1;
+    color: #001f3f;
+    --mainBackground: #e0e0e0;
+    --buttonBackground: #eaf2f1;
+    --boxShadow: 20px 20px 60px #bebebe,
+    -20px -20px 60px #ffffff;;
+}
+.root.dark {
+    background: #32354e;
+    color: whitesmoke;
+    --mainBackground: #3e4274;
+    --buttonBackground: #9399ec;
+    --boxShadow: -20px -20px 20px #474c85;
+}
+
 .main {
 
     font-family: 'Courier New', Courier, monospace;
-    color: #001f3f;
+
     display: flex;
     justify-content: center;
     border-radius: 30px;
-    background: #e0e0e0;
-    box-shadow:  20px 20px 60px #bebebe,
-    -20px -20px 60px #ffffff;
+    background: var(--mainBackground);
+    box-shadow:  var(--boxShadow)
+
 
 }
 
@@ -29,7 +52,7 @@
     justify-content: center;
 }
 
-.display-error{
+.displayError{
     color: red;
     display: flex;
     width: 200px;
@@ -52,4 +75,3 @@
 
 
 }
-

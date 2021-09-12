@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useCallback} from 'react';
-import './App.css';
+import React, {ChangeEvent, useCallback, useState} from 'react';
+import s from './App.module.css';
 import {ButtonMemo} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
 import {Settings} from "./components/Settings";
@@ -32,39 +32,45 @@ function App() {
     const setConfig = useCallback(() => dispatch(setConfigAc(true)), [dispatch])
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
-
+    const [isDark, setIsDark] = useState(false)
+    const changeTheme = () =>  setIsDark(!isDark)
 
     const error = maxValue <= minValue || maxValue <= 0 || minValue < 0
     const buttonDisableInc = counterValue === maxValue
 
+    return (
+        <div className={ `${s.root} ${isDark? s.dark : s.light}` }>
+            <div className={s.main}>
 
-    return (<div className={"main"}>
+                {displayMode
+                    ? <div className={s.container}>
+                        <div>
+                            <DisplayCounter counterValue={counterValue} maxValue={maxValue}/>
+                        </div>
+                        <div>
+                            <ButtonMemo onClick={incButton} title={"inc"} buttonDisable={buttonDisableInc}/>
 
-            {displayMode
-                ? <div className="container">
-                    <div>
-                        <DisplayCounter counterValue={counterValue} maxValue={maxValue}/>
+                            <ButtonMemo onClick={resetState} title={"reset"}/>
+
+                            <ButtonMemo onClick={changeDisplayMode} title={"set"}/>
+
+                            <ButtonMemo onClick={changeTheme} title={"theme"}  />
+                        </div>
+
                     </div>
-                    <div>
-                        <ButtonMemo onClick={incButton} title={"inc"} buttonDisable={buttonDisableInc}/>
-
-                        <ButtonMemo onClick={resetState} title={"reset"}/>
-
-                        <ButtonMemo onClick={changeDisplayMode} title={"set"}/>
+                    : <div className={s.settings}>
+                        <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue}
+                                onChangeMin={onChaneMinValue} isError={error}/>
+                        <div>
+                            <ButtonMemo title={"set"} onClick={setConfig} buttonDisable={error}/>
+                        </div>
                     </div>
 
-                </div>
-                : <div className={"settings"}>
-                    <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue}
-                              onChangeMin={onChaneMinValue} isError={error}/>
-                    <div>
-                        <ButtonMemo title={"set"} onClick={setConfig} buttonDisable={error}/>
-                    </div>
-                </div>
+                }
 
-            }
+
+            </div>
         </div>
-
     );
 }
 

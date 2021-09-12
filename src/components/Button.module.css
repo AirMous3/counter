@@ -1,7 +1,6 @@
 .button {
-
     color: inherit;
-    background: #eaf2f1;
+    background: var(--buttonBackground);
     margin: 5px;
     width: 80px;
     padding: 5px 0;
@@ -10,22 +9,13 @@
     border: none;
     font: inherit;
     font-size: 18px;
-
-
-
-
 }
 
 .button:not(.disabled):hover {
     filter: brightness(80%);
-
-
-
-
 }
 
 .button:not(.disabled):active {
-
     transform: scale(0.95);
 }
 
