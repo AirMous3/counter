@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
 import s from './App.module.css';
 import {ButtonMemo} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
@@ -33,13 +33,22 @@ function App() {
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
     const [isDark, setIsDark] = useState(false)
-    const changeTheme = () =>  setIsDark(!isDark)
+    const changeTheme = () => {
+        setIsDark(!isDark)
+        localStorage.setItem("isDark", JSON.stringify(!isDark))
+    }
+    useEffect(() => {
+        const stringValue = localStorage.getItem("isDark")
+        const newValue = JSON.parse(stringValue!)
+        setIsDark(newValue)
+    }, [])
+
 
     const error = maxValue <= minValue || maxValue <= 0 || minValue < 0
     const buttonDisableInc = counterValue === maxValue
 
     return (
-        <div className={ `${s.root} ${isDark? s.dark : s.light}` }>
+        <div className={`${s.root} ${isDark ? s.dark : s.light}`}>
             <div className={s.main}>
 
                 {displayMode
@@ -54,13 +63,13 @@ function App() {
 
                             <ButtonMemo onClick={changeDisplayMode} title={"set"}/>
 
-                            <ButtonMemo onClick={changeTheme} title={"theme"}  />
+                            <ButtonMemo onClick={changeTheme} title={"theme"}/>
                         </div>
 
                     </div>
                     : <div className={s.settings}>
                         <Settings minValue={minValue} maxValue={maxValue} onChangeMax={onChaneMaxValue}
-                                onChangeMin={onChaneMinValue} isError={error}/>
+                                  onChangeMin={onChaneMinValue} isError={error}/>
                         <div>
                             <ButtonMemo title={"set"} onClick={setConfig} buttonDisable={error}/>
                         </div>
