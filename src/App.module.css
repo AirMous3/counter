@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .root.light {
     background: #eaf2f1;
     color: #001f3f;
@@ -13,6 +14,7 @@
     --boxShadow: 20px 20px 60px #bebebe,
     -20px -20px 60px #ffffff;;
 }
+
 .root.dark {
     background: #32354e;
     color: whitesmoke;
@@ -29,7 +31,7 @@
     justify-content: center;
     border-radius: 30px;
     background: var(--mainBackground);
-    box-shadow:  var(--boxShadow)
+    box-shadow: var(--boxShadow)
 
 
 }
@@ -43,7 +45,7 @@
     flex-direction: column;
 }
 
-.display{
+.display {
     display: flex;
     width: 200px;
     height: 200px;
@@ -52,16 +54,9 @@
     justify-content: center;
 }
 
-.displayError{
+.displayError {
     color: red;
-    display: flex;
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
-    align-items: center;
-    justify-content: center;
 }
-
 
 
 .settings {
@@ -71,7 +66,6 @@
     height: 400px;
     align-items: center;
     justify-content: center;
-
 
 
 }

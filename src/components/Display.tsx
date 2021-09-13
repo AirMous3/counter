@@ -3,16 +3,13 @@ import s from "../App.module.css"
 
 
 type CounterType = {
+    isError: boolean
     counterValue: number
-    maxValue: number
 }
 
-export const DisplayCounter = ({counterValue,maxValue}:CounterType) => {
+export const DisplayCounter = ({isError, counterValue}: CounterType) => {
 
-
-
-    const className = counterValue === maxValue ? s.displayError : s.display
     return (
-        <div  className={className} >{counterValue}</div>
+        <div className={`${s.display} ${isError? s.displayError: ""}`}>{counterValue}</div>
     )
 }

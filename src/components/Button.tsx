@@ -11,9 +11,7 @@ type ButtonPropsType = {
 
 export const Button = ({title, buttonDisable, onClick}: ButtonPropsType) => {
 
-
-
-    const className = `${s.button} ${buttonDisable? s.disabled : ""}`
+    const className = `${s.button} ${buttonDisable ? s.disabled : ""}`
 
     return (
         <button disabled={buttonDisable} onClick={onClick} className={className}>{title}</button>

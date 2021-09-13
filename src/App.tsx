@@ -39,11 +39,8 @@ function App() {
     }
     useEffect(() => {
         const stringValue = localStorage.getItem("isDark")
-        const newValue = JSON.parse(stringValue!)
-        setIsDark(newValue)
+        setIsDark(JSON.parse(stringValue!))
     }, [])
-
-
     const error = maxValue <= minValue || maxValue <= 0 || minValue < 0
     const buttonDisableInc = counterValue === maxValue
 
@@ -54,7 +51,7 @@ function App() {
                 {displayMode
                     ? <div className={s.container}>
                         <div>
-                            <DisplayCounter counterValue={counterValue} maxValue={maxValue}/>
+                            <DisplayCounter counterValue={counterValue} isError={buttonDisableInc}/>
                         </div>
                         <div>
                             <ButtonMemo onClick={incButton} title={"inc"} buttonDisable={buttonDisableInc}/>
