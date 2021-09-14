@@ -1,5 +1,5 @@
 import React from "react";
-import "./Toggle.css"
+import s from "./Toggle.module.css"
 
 
 type PropsType = {
@@ -7,11 +7,12 @@ type PropsType = {
     isDark: boolean
 }
 export const Toggle = ({onClick, isDark}: PropsType) => {
+    console.log("toggle rendered")
 
-    return <div className={"main"} id={"main"}>
-        <label className="switch">
-            <input type="checkbox" checked={isDark} onClick={onClick} id="checkBox"/>
-            <span className="slider"/>
+    return <div className={s.main} >
+        <label className={s.switch}>
+            <input type="checkbox" defaultChecked={isDark} onClick={onClick} />
+            <span className={s.slider}/>
         </label>
     </div>
 }

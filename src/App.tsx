@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import s from './App.module.css';
 import {ButtonMemo} from "./components/Button";
 import {DisplayCounter} from "./components/Display";
@@ -30,11 +30,11 @@ function App() {
     const setConfig = useCallback(() => dispatch(setConfigAc(true)), [dispatch])
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
-    const [isDark, setIsDark] = useState(JSON.parse(localStorage.getItem("isDark" )!))  // take value from lS
-    const changeTheme = () => {
+    const [isDark, setIsDark] = useState(JSON.parse(localStorage.getItem("isDark")!))  // take value from lS
+    const changeTheme = useCallback(() => {
         setIsDark(!isDark)
         localStorage.setItem("isDark", JSON.stringify(!isDark))
-    }
+    }, [isDark])
 
     const error = maxValue <= minValue || maxValue <= 0 || minValue < 0
     const buttonDisableInc = counterValue === maxValue
