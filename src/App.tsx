@@ -13,6 +13,7 @@ import {
     setConfigAc
 } from "./Redux/Reducers/Main-Reducer";
 import {selectCounterValue, selectDisplayMode, selectMaxValue, selectMinValue} from "./selectors";
+import {ToggleMode} from "./components/Toggle";
 
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
 
                 {displayMode
                     ? <div className={s.container}>
+                        <div className={s.toggleMode}>
+                            <ToggleMode onClick={changeTheme}/>
+                        </div>
                         <div>
                             <DisplayCounter counterValue={counterValue} isError={buttonDisableInc}/>
                         </div>
@@ -59,8 +63,6 @@ function App() {
                             <ButtonMemo onClick={resetState} title={"reset"}/>
 
                             <ButtonMemo onClick={changeDisplayMode} title={"set"}/>
-
-                            <ButtonMemo onClick={changeTheme} title={"theme"}/>
                         </div>
 
                     </div>

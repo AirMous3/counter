@@ -40,7 +40,7 @@
     display: flex;
     width: 400px;
     height: 400px;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     flex-direction: column;
 }
@@ -66,6 +66,11 @@
     height: 400px;
     align-items: center;
     justify-content: center;
+}
 
-
+.toggleMode {
+    display: flex;
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 10px;
 }
