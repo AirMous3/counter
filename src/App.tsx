@@ -19,13 +19,10 @@ import {ToggleMode} from "./components/Toggle";
 function App() {
 
     const dispatch = useDispatch()
-    // const displayMode = useSelector<RootStateType, boolean>(state => state.counter.displayMode)
+
     const displayMode = useSelector(selectDisplayMode)
-    // const counterValue = useSelector<RootStateType, number>(state => state.counter.counterValue)
     const counterValue = useSelector(selectCounterValue)
-    // const maxValue = useSelector<RootStateType, number>(state => state.counter.maxValue)
     const maxValue = useSelector(selectMaxValue)
-    // const minValue = useSelector<RootStateType, number>(state => state.counter.minValue)
     const minValue = useSelector(selectMinValue)
     const incButton = useCallback(() => dispatch(incrementCounterValueAc()), [dispatch])
     const resetState = useCallback(() => dispatch(resetStateAc()), [dispatch])
@@ -33,15 +30,12 @@ function App() {
     const setConfig = useCallback(() => dispatch(setConfigAc(true)), [dispatch])
     const onChaneMaxValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMaxValueAc(Number(e.currentTarget.value)))
     const onChaneMinValue = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeMinValueAc(Number(e.currentTarget.value)))
-    const [isDark, setIsDark] = useState(false)
+    const [isDark, setIsDark] = useState(JSON.parse(localStorage.getItem("isDark" )!))  // take value from lS
     const changeTheme = () => {
         setIsDark(!isDark)
         localStorage.setItem("isDark", JSON.stringify(!isDark))
     }
-    useEffect(() => {
-        const stringValue = localStorage.getItem("isDark")
-        setIsDark(JSON.parse(stringValue!))
-    }, [])
+
     const error = maxValue <= minValue || maxValue <= 0 || minValue < 0
     const buttonDisableInc = counterValue === maxValue
 
@@ -52,7 +46,7 @@ function App() {
                 {displayMode
                     ? <div className={s.container}>
                         <div className={s.toggleMode}>
-                            <ToggleMode onClick={changeTheme}/>
+                            <ToggleMode onClick={changeTheme} isDark={isDark}/>
                         </div>
                         <div>
                             <DisplayCounter counterValue={counterValue} isError={buttonDisableInc}/>

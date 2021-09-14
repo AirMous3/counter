@@ -4,13 +4,13 @@ import "./Toggle.css"
 
 type PropsType = {
     onClick: () => void
+    isDark: boolean
 }
-export const Toggle = ({onClick}: PropsType) => {
+export const Toggle = ({onClick, isDark}: PropsType) => {
 
-    console.log("toggle rendered")
-    return <div className={"main"}>
+    return <div className={"main"} id={"main"}>
         <label className="switch">
-            <input type="checkbox" onClick={onClick} id="checkBox"/>
+            <input type="checkbox" checked={isDark} onClick={onClick} id="checkBox"/>
             <span className="slider"/>
         </label>
     </div>
